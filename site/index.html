@@ -414,13 +414,22 @@
                 padding: 10px 16px;
             }
         }
+        .logo-img {
+            height: 140px;
+            width: auto;
+            display: block;
+        }
+   
     </style>
+
 </head>
 <body>
     <header class="header">
         <div class="container">
             <div class="nav">
-                <div class="logo">Макс<span>App</span></div>
+                <div class="logo">
+    <img src="images/logo.svg" alt="МаксApp" class="logo-img">
+</div>
                 <div class="nav-links">
                     <a href="#services">Услуги</a>
                     <a href="#how">Как работаем</a>
@@ -593,12 +602,35 @@
     </main>
 
     <footer>
-        <div class="container footer-inner">
-            <div><strong>МаксApp</strong><br>Приложение внутри мессенджера — ничего не скачивать</div>
-            <div>📧 hello@maxapp.ru<br>📱 @maxapp_bot — демо в мессенджере</div>
-            <div>© 2025 — Делаем бизнес ближе к клиентам</div>
+    <div class="container footer-inner" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px; font-size: 0.95rem;">
+        <!-- Левый блок: Описание проекта -->
+        <div style="flex: 1; min-width: 250px;">
+            <strong>МаксApp</strong><br>
+            <span style="opacity: 0.85;">Приложение внутри мессенджера — ничего не скачивать.</span>
+            <div style="margin-top: 16px; font-size: 0.8rem; opacity: 0.6; line-height: 1.6;">
+                ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ ДЫКМАН ИВАН МИХАЙЛОВИЧ<br>
+                ИНН: 667324196880<br>
+                ОГРНИП: 326965800155238
+            </div>
         </div>
-    </footer>
+        
+        <!-- Средний блок: Контакты -->
+        <div style="flex: 1; min-width: 200px;">
+            <strong>Контакты</strong><br>
+            <span style="opacity: 0.85;">📧 hello@maxapp.ru</span><br>
+            <span style="opacity: 0.85;">📱 @maxapp_bot — демо в мессенджере</span>
+        </div>
+        
+        <!-- Правый блок: Документы и Копирайт -->
+        <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 6px;">
+            <strong>Правовая информация</strong><br>
+            <a href="/privacy.html" style="color: #cae3db; text-decoration: underline; opacity: 0.85; font-size: 0.85rem; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cae3db'">Политика конфиденциальности</a>
+            <a href="/offer.html" style="color: #cae3db; text-decoration: underline; opacity: 0.85; font-size: 0.85rem; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cae3db'">Публичная оферта (SaaS)</a>
+            <div style="margin-top: 10px; font-size: 0.85rem; opacity: 0.6;">© 2026 — Делаем бизнес ближе к клиентам</div>
+        </div>
+    </div>
+</footer>
+
 
     <script>
         // Форма
