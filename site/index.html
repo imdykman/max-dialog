@@ -596,7 +596,8 @@
 
                 <!-- Поле для имени -->
                 <div class="form-group">
-                    <input type="text" name="name" placeholder="Ваше имя" required>
+                    <input type="tel" id="phoneInput" name="phone" placeholder="+7 909 000 40 77" required>
+                    <small style="display: block; margin-top: 4px; color: #6c7a7a;">Введите номер без лишних символов</small>
                 </div>
 
                 <!-- Поле для телефона / Telegram -->
@@ -674,5 +675,58 @@
             });
         });
     </script>
+
+<script>
+    const phoneInput = document.getElementById('phoneInput');
+
+    phoneInput.addEventListener('input', function(e) {
+        // Удаляем все НЕ-цифры
+        let raw = this.value.replace(/\D/g, '');
+
+        // Если номер начинается с 8 или 7 — заменяем на 7 (для единообразия)
+        if (raw.startsWith('8')) {
+            raw = '7' + raw.slice(1);
+        } else if (raw.startsWith('9')) {
+            raw = '7' + raw;
+        } else if (raw.startsWith('7') && raw.length > 1) {
+            // Оставляем как есть, если начинается с 7
+        } else if (raw.length > 0 && !raw.startsWith('7')) {
+            // Если ввели что-то другое — просто очищаем
+            raw = '';
+        }
+
+        // Форматируем номер: +7 (XXX) XXX-XX-XX
+        let formatted = '';
+        if (raw.length > 0) {
+            formatted = '+7';
+            if (raw.length > 1) {
+                formatted += ' (' + raw.slice(1, 4);
+            }
+            if (raw.length > 4) {
+                formatted += ') ' + raw.slice(4, 7);
+            }
+            if (raw.length > 7) {
+                formatted += ' ' + raw.slice(7, 9);
+            }
+            if (raw.length > 9) {
+                formatted += ' ' + raw.slice(9, 11);
+            }
+            // Обрезаем, если больше 11 цифр
+            if (raw.length > 11) {
+                raw = raw.slice(0, 11);
+            }
+        }
+
+        this.value = formatted;
+    });
+
+    // Дополнительная очистка перед отправкой (чтобы в Netlify попал чистый номер)
+    document.querySelector('form[name="contact"]').addEventListener('submit', function(e) {
+        const phoneField = document.getElementById('phoneInput');
+        // Удаляем все НЕ-цифры перед отправкой, чтобы в базе был чистый номер
+        phoneField.value = phoneField.value.replace(/\D/g, '');
+    });
+</script>
+
 </body>
 </html>
