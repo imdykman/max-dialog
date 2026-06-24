@@ -585,46 +585,49 @@
             <h3 style="font-size:1.8rem; margin-bottom: 8px;">Давайте сделаем приложение для вашего бизнеса</h3>
             <p style="margin-bottom: 28px; color:#4f6f64;">Оставьте заявку — мы покажем, как будет работать приложение в мессенджере Макс</p>
             
-            <!-- Новая форма с подключением к Netlify -->
-            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                <!-- Скрытые поля, обязательные для Netlify Forms -->
-                <input type="hidden" name="form-name" value="contact" />
-                
-                <!-- Поле-ловушка для спам-ботов (будет скрыто) -->
-                <p style="display: none;">
-                    <label>Не заполняйте это поле, если вы человек: <input name="bot-field" /></label>
-                </p>
+           <!-- Новая форма с подключением к Netlify -->
+<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <!-- Скрытые поля, обязательные для Netlify Forms -->
+    <input type="hidden" name="form-name" value="contact" />
+    
+    <!-- Поле-ловушка для спам-ботов (будет скрыто) -->
+    <p style="display: none;">
+        <label>Не заполняйте это поле, если вы человек: <input name="bot-field" /></label>
+    </p>
 
-                <!-- Поле для имени -->
-                <div class="form-group">
-                <input type="text" name="name" placeholder="Ваше имя" required>
-                </div>
-                <!-- Поле для телефона / -->
-                  <div class="form-group">
-                    <input type="tel" id="phoneInput" name="phone" placeholder="+7 909 000 40 77" required>
-                    <small style="display: block; margin-top: 4px; color: #6c7a7a;">Введите номер без лишних символов</small>
-                </div>
-                
+    <!-- Поле для имени -->
+    <div class="form-group">
+        <input type="text" name="name" placeholder="Ваше имя" required>
+    </div>
 
-                <!-- Поле для сообщения -->
-                <div class="form-group">
-                    <textarea name="message" rows="3" placeholder="Например: салон красоты, нужна запись к 3 мастерам и напоминания"></textarea>
-                </div>
+    <!-- Поле для телефона -->
+    <div class="form-group">
+        <input type="tel" id="phoneInput" name="phone" placeholder="+7 909 000 40 77" required>
+        <small style="display: block; margin-top: 4px; color: #6c7a7a;">Введите номер без лишних символов</small>
+    </div>
 
-                <div class="form-group" style="display: flex; align-items: flex-start; gap: 10px; margin-top: 10px;">
-                 <input type="checkbox" id="offerAgree" name="offerAgree" required style="width: 20px; height: 20px; margin-top: 3px;">
-                <label for="offerAgree" style="font-size: 0.9rem; color: #4f6f64;">
-                Я согласен с условиями <a href="/offer.html" target="_blank">Публичной оферты</a> и даю согласие на обработку персональных данных
-                </label>
-                </div>
+    <!-- Поле для сообщения -->
+    <div class="form-group">
+        <textarea name="message" rows="3" placeholder="Например: салон красоты, нужна запись к 3 мастерам и напоминания"></textarea>
+    </div>
 
-                <input type="checkbox" id="offerAgree" name="offerAgree" value="true" required>
-                <input type="hidden" name="offer_text" value="Пользователь подтвердил согласие с условиями Публичной оферты (max-dialog.ru/offer.html)">
-                
-                <!-- Кнопка отправки -->
-                <button type="submit" class="btn-primary" style="width:100%; justify-content: center;">📲 Получить консультацию</button>
-                <p style="font-size:12px; text-align:center; margin-top:16px;">Ответим за 2 часа. Никаких приложений ставить не нужно 😉</p>
-            </form>
+    <!-- Чекбокс согласия с офертой (ОДИН!) -->
+    <div class="form-group" style="display: flex; align-items: flex-start; gap: 10px; margin-top: 10px;">
+        <input type="checkbox" id="offerAgree" name="offerAgree" required style="width: 20px; height: 20px; margin-top: 3px;">
+        <label for="offerAgree" style="font-size: 0.9rem; color: #4f6f64;">
+            Я согласен с условиями <a href="/offer.html" target="_blank">Публичной оферты</a> и даю согласие на обработку персональных данных
+        </label>
+    </div>
+
+    <!-- Скрытое поле для текста в письме -->
+    <input type="hidden" name="offer_text" value="Пользователь подтвердил согласие с условиями Публичной оферты (max-dialog.ru/offer.html)">
+    
+    <!-- Кнопка отправки -->
+    <button type="submit" id="submitBtn" class="btn-primary" style="width:100%; justify-content: center; opacity: 0.6;" disabled>
+        📲 Получить консультацию
+    </button>
+    <p style="font-size:12px; text-align:center; margin-top:16px;">Ответим за 2 часа. Никаких приложений ставить не нужно 😉</p>
+</form>
         </div>
     </div>
 </section>
@@ -737,11 +740,15 @@
         // Удаляем все НЕ-цифры перед отправкой, чтобы в базе был чистый номер
         phoneField.value = phoneField.value.replace(/\D/g, '');
 
-        // Активация кнопки при согласии с офертой
+   // Активация кнопки при согласии с офертой
 const offerCheckbox = document.getElementById('offerAgree');
 const submitBtn = document.getElementById('submitBtn');
 
 if (offerCheckbox && submitBtn) {
+    // ⬇️ НАЧАЛЬНОЕ СОСТОЯНИЕ (при загрузке страницы)
+    submitBtn.style.opacity = '0.6';
+    submitBtn.style.pointerEvents = 'none';
+
     offerCheckbox.addEventListener('change', function() {
         if (this.checked) {
             submitBtn.style.opacity = '1';
