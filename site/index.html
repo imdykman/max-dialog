@@ -596,9 +596,9 @@
                 </p>
 
                 <!-- Поле для имени -->
-<div class="form-group">
-    <input type="text" name="name" placeholder="Ваше имя" required>
-</div>
+                <div class="form-group">
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                </div>
                 <!-- Поле для телефона / -->
                   <div class="form-group">
                     <input type="tel" id="phoneInput" name="phone" placeholder="+7 909 000 40 77" required>
@@ -611,12 +611,14 @@
                     <textarea name="message" rows="3" placeholder="Например: салон красоты, нужна запись к 3 мастерам и напоминания"></textarea>
                 </div>
 
-<div class="form-group" style="display: flex; align-items: flex-start; gap: 10px; margin-top: 10px;">
-    <input type="checkbox" id="offerAgree" name="offerAgree" required style="width: 20px; height: 20px; margin-top: 3px;">
-    <label for="offerAgree" style="font-size: 0.9rem; color: #4f6f64;">
-        Я согласен с условиями <a href="/offer.html" target="_blank">Публичной оферты</a> и даю согласие на обработку персональных данных
-    </label>
-</div>
+                <div class="form-group" style="display: flex; align-items: flex-start; gap: 10px; margin-top: 10px;">
+                 <input type="checkbox" id="offerAgree" name="offerAgree" required style="width: 20px; height: 20px; margin-top: 3px;">
+                <label for="offerAgree" style="font-size: 0.9rem; color: #4f6f64;">
+                Я согласен с условиями <a href="/offer.html" target="_blank">Публичной оферты</a> и даю согласие на обработку персональных данных
+                </label>
+                </div>
+
+                <input type="checkbox" id="offerAgree" name="offerAgree" value="true" required>
 
                 <!-- Кнопка отправки -->
                 <button type="submit" class="btn-primary" style="width:100%; justify-content: center;">📲 Получить консультацию</button>
