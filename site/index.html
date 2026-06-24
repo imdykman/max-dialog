@@ -578,27 +578,45 @@
         </section>
 
         <!-- Форма захвата -->
-        <section id="contact" class="section">
-            <div class="container">
-                <div class="contact-form">
-                    <h3 style="font-size:1.8rem; margin-bottom: 8px;">Давайте сделаем приложение для вашего бизнеса</h3>
-                    <p style="margin-bottom: 28px; color:#4f6f64;">Оставьте заявку — мы покажем, как будет работать приложение в мессенджере Макс</p>
-                    <form id="callbackForm">
-                        <div class="form-group">
-                            <input type="text" placeholder="Ваше имя" id="nameInput" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" placeholder="Телефон или Telegram / Макс" id="contactInput" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea rows="3" placeholder="Например: салон красоты, нужна запись к 3 мастерам и напоминания" id="messageInput"></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary" style="width:100%; justify-content: center;">📲 Получить консультацию</button>
-                        <p style="font-size:12px; text-align:center; margin-top:16px;">Ответим за 2 часа. Никаких приложений ставить не нужно 😉</p>
-                    </form>
+<section id="contact" class="section">
+    <div class="container">
+        <div class="contact-form">
+            <h3 style="font-size:1.8rem; margin-bottom: 8px;">Давайте сделаем приложение для вашего бизнеса</h3>
+            <p style="margin-bottom: 28px; color:#4f6f64;">Оставьте заявку — мы покажем, как будет работать приложение в мессенджере Макс</p>
+            
+            <!-- Новая форма с подключением к Netlify -->
+            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <!-- Скрытые поля, обязательные для Netlify Forms -->
+                <input type="hidden" name="form-name" value="contact" />
+                
+                <!-- Поле-ловушка для спам-ботов (будет скрыто) -->
+                <p style="display: none;">
+                    <label>Не заполняйте это поле, если вы человек: <input name="bot-field" /></label>
+                </p>
+
+                <!-- Поле для имени -->
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Ваше имя" required>
                 </div>
-            </div>
-        </section>
+
+                <!-- Поле для телефона / Telegram -->
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="Телефон или Telegram / Макс" required>
+                </div>
+
+                <!-- Поле для сообщения -->
+                <div class="form-group">
+                    <textarea name="message" rows="3" placeholder="Например: салон красоты, нужна запись к 3 мастерам и напоминания"></textarea>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <button type="submit" class="btn-primary" style="width:100%; justify-content: center;">📲 Получить консультацию</button>
+                <p style="font-size:12px; text-align:center; margin-top:16px;">Ответим за 2 часа. Никаких приложений ставить не нужно 😉</p>
+            </form>
+        </div>
+    </div>
+</section>
+
     </main>
 
     <footer>
@@ -633,22 +651,7 @@
 
 
     <script>
-        // Форма
-        const form = document.getElementById('callbackForm');
-        if(form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('nameInput').value.trim();
-                const contact = document.getElementById('contactInput').value.trim();
-                if(name && contact) {
-                    alert(`Спасибо, ${name}! Мы свяжемся с вами в ${contact} и покажем, как работает приложение в мессенджере Макс. Без установки, без скачиваний!`);
-                    form.reset();
-                } else {
-                    alert('Пожалуйста, укажите имя и контакт для связи :)');
-                }
-            });
-        }
-
+       
         // Демо кнопка
         const demoBtn = document.getElementById('openDemoBtn');
         if(demoBtn) {
